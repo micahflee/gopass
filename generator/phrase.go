@@ -3,7 +3,6 @@ package generator
 import (
 	"crypto/rand"
 	_ "embed"
-	"log"
 	"math/big"
 	"strings"
 )
@@ -17,7 +16,7 @@ var wordlist string
 // The 'num' parameter determines whether the passphrase should include numbers.
 // The 'sym' parameter determines whether the passphrase should include symbols.
 // The 'cap' parameter determines whether the passphrase should include capital letters.
-func GeneratePassphrase(length int, sep string, num bool, sym bool, cap bool) string {
+func GeneratePassphrase(length int, sep string, num bool, sym bool, cap bool) (string, error) {
 	allWords := strings.Split(wordlist, "\n")
 
 	var passphrase string
@@ -27,7 +26,7 @@ func GeneratePassphrase(length int, sep string, num bool, sym bool, cap bool) st
 	for i := 0; i < length; i++ {
 		n, err := rand.Int(rand.Reader, big.NewInt(int64(len(allWords))))
 		if err != nil {
-			log.Fatal(err)
+			return "", err
 		}
 		passphraseWords[i] = allWords[n.Int64()]
 	}
@@ -39,14 +38,14 @@ func GeneratePassphrase(length int, sep string, num bool, sym bool, cap bool) st
 		// Choose a word to add a number to
 		n, err := rand.Int(rand.Reader, big.NewInt(int64(length)))
 		if err != nil {
-			log.Fatal(err)
+			return "", err
 		}
 		numIndex = int(n.Int64())
 
 		// Choose a random digit
 		n, err = rand.Int(rand.Reader, big.NewInt(10))
 		if err != nil {
-			log.Fatal(err)
+			return "", err
 		}
 		numDigit = n.String()
 	}
@@ -58,7 +57,7 @@ func GeneratePassphrase(length int, sep string, num bool, sym bool, cap bool) st
 		// Choose a word to add a symbol to
 		n, err := rand.Int(rand.Reader, big.NewInt(int64(length)))
 		if err != nil {
-			log.Fatal(err)
+			return "", err
 		}
 		symIndex = int(n.Int64())
 
@@ -66,7 +65,7 @@ func GeneratePassphrase(length int, sep string, num bool, sym bool, cap bool) st
 		symbols := "!@#$%^&*()_+"
 		n, err = rand.Int(rand.Reader, big.NewInt(int64(len(symbols))))
 		if err != nil {
-			log.Fatal(err)
+			return "", err
 		}
 		symChar = string(symbols[n.Int64()])
 	}
@@ -77,7 +76,7 @@ func GeneratePassphrase(length int, sep string, num bool, sym bool, cap bool) st
 		// Choose a word to capitalize
 		n, err := rand.Int(rand.Reader, big.NewInt(int64(length)))
 		if err != nil {
-			log.Fatal(err)
+			return "", err
 		}
 		capIndex = int(n.Int64())
 	}
@@ -107,5 +106,5 @@ func GeneratePassphrase(length int, sep string, num bool, sym bool, cap bool) st
 		}
 	}
 
-	return passphrase
+	return passphrase, nil
 }
