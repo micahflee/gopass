@@ -24,6 +24,7 @@ package cmd
 import (
 	"fmt"
 
+	"github.com/micahflee/gopass/generator"
 	"github.com/spf13/cobra"
 )
 
@@ -61,7 +62,8 @@ and whether or not to include a numbers and/or a symbols.`,
 			return
 		}
 
-		fmt.Println("phrase called with length:", len, "separator:", sep, "number:", num, "symbol:", sym, "capitalize:", cap)
+		phrase := generator.GeneratePassphrase(len, sep, num, sym, cap)
+		fmt.Println(phrase)
 	},
 }
 
