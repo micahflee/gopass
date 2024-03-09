@@ -21,7 +21,7 @@ THE SOFTWARE.
 */
 package main
 
-import "passphraseme/cmd"
+import "github.com/micahflee/gopass/cmd"
 
 func main() {
 	cmd.Execute()

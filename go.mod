@@ -1,4 +1,4 @@
-module passphraseme
+module github.com/micahflee/gopass
 
 go 1.22.1
 

@@ -29,9 +29,9 @@ import (
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "passphraseme",
+	Use:   "gopass",
 	Short: "A secure password and passphrase generator",
-	Long: `Passphraseme is a secure password and passphrase generator that uses 
+	Long: `gopass is a secure password and passphrase generator that uses 
 the Diceware method to generate secure and memorable passphrases.`,
 }
 
