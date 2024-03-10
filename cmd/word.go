@@ -28,7 +28,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// wordCmd represents the word command
 var wordCmd = &cobra.Command{
 	Use:   "word",
 	Short: "Generate a password",

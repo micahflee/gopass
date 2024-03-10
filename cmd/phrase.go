@@ -28,7 +28,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// phraseCmd represents the phrase command
 var phraseCmd = &cobra.Command{
 	Use:   "phrase",
 	Short: "Generate a passphrase",
