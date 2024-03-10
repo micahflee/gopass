@@ -29,8 +29,8 @@ import (
 
 var rootCmd = &cobra.Command{
 	Use:   "gopass",
-	Short: "A secure password and passphrase generator",
-	Long:  `gopass is a secure password and passphrase generator that uses the Diceware method to generate secure and memorable passphrases.`,
+	Short: "A secure password, passphrase, and passcode generator",
+	Long:  `Gopass is a secure password, passphrase, and passcode generator that uses a cryptographically secure random number generator. It uses the Diceware method to generate secure and memorable passphrases.`,
 }
 
 func Execute() {

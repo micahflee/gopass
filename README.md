@@ -1,8 +1,6 @@
 # Gopass
 
-Gopass is a secure password and passphrase generator that uses the Diceware method to generate secure and memorable passphrases.
-
-Passwords and passphrases are generated using a [cryptographically secure random number generator](https://pkg.go.dev/crypto/rand).
+Gopass is a secure password, passphrase, and passcode generator that uses a [cryptographically secure random number generator]((https://pkg.go.dev/crypto/rand)). It uses the Diceware method to generate secure and memorable passphrases.
 
 For example, if you need a passphrase, run `gopass phrase`:
 
@@ -11,11 +9,18 @@ $ gopass phrase
 puma-nag2-scout!-chute-CHUNK-emu
 ```
 
-And if you need a password, run `gopass word`:
+If you need a password, run `gopass word`:
 
 ```
 $ gopass word
 KMK^XhP+n+53xBbnGeN7
+```
+
+And if you need passcode, run `gopass code`:
+
+```
+$ gopass code
+060781
 ```
 
 ## Generating Passphrases
@@ -51,3 +56,17 @@ gopass word --length 16 --no-symbols
 ```
 
 This will generate a password like `QKiyeYcyd4B6ndq5`.
+
+## Generator Passcodes
+
+By default, passcodes are 6 digits long. This is configurable:
+
+- `-l`, `--length int`: Number of digits in the passcode (default 6)
+
+For example, if you want a 4 digit passcode:
+
+```
+gopass code --length 4
+```
+
+This will generate a passcode like `4320`.
