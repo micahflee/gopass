@@ -37,7 +37,7 @@ var wordlist string
 // The 'num' parameter determines whether the passphrase should include numbers.
 // The 'sym' parameter determines whether the passphrase should include symbols.
 // The 'cap' parameter determines whether the passphrase should include capital letters.
-func GeneratePassphrase(length int, sep string, num bool, sym bool, cap bool) (string, error) {
+func GeneratePassphrase(length int, sep string, no_num bool, no_sym bool, no_cap bool) (string, error) {
 	allWords := strings.Split(wordlist, "\n")
 
 	var passphrase string
@@ -55,7 +55,7 @@ func GeneratePassphrase(length int, sep string, num bool, sym bool, cap bool) (s
 	// Add a number to the passphrase
 	var numIndex int
 	var numDigit = ""
-	if num {
+	if !no_num {
 		// Choose a word to add a number to
 		n, err := rand.Int(rand.Reader, big.NewInt(int64(length)))
 		if err != nil {
@@ -74,7 +74,7 @@ func GeneratePassphrase(length int, sep string, num bool, sym bool, cap bool) (s
 	// Add a symbol to the passphrase
 	var symIndex int
 	var symChar = ""
-	if sym {
+	if !no_sym {
 		// Choose a word to add a symbol to
 		n, err := rand.Int(rand.Reader, big.NewInt(int64(length)))
 		if err != nil {
@@ -93,7 +93,7 @@ func GeneratePassphrase(length int, sep string, num bool, sym bool, cap bool) (s
 
 	// Capitalize a word
 	var capIndex int
-	if cap {
+	if !no_cap {
 		// Choose a word to capitalize
 		n, err := rand.Int(rand.Reader, big.NewInt(int64(length)))
 		if err != nil {
@@ -105,19 +105,19 @@ func GeneratePassphrase(length int, sep string, num bool, sym bool, cap bool) (s
 	// Join the words together
 	for i := 0; i < length; i++ {
 		// Add the word (capitalized or not)
-		if cap && i == capIndex {
+		if !no_cap && i == capIndex {
 			passphrase += strings.ToUpper(passphraseWords[i])
 		} else {
 			passphrase += passphraseWords[i]
 		}
 
 		// Add the number
-		if num && i == numIndex {
+		if !no_num && i == numIndex {
 			passphrase += numDigit
 		}
 
 		// Add the symbol
-		if sym && i == symIndex {
+		if !no_sym && i == symIndex {
 			passphrase += symChar
 		}
 

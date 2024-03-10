@@ -30,11 +30,11 @@ import (
 func TestGeneratePassphraseLength(t *testing.T) {
 	length := 5
 	sep := "-"
-	num := false
-	sym := false
-	cap := false
+	no_num := true
+	no_sym := true
+	no_cap := true
 
-	passphrase, err := GeneratePassphrase(length, sep, num, sym, cap)
+	passphrase, err := GeneratePassphrase(length, sep, no_num, no_sym, no_cap)
 	if err != nil {
 		t.Errorf("Error: %v", err)
 	}
@@ -49,11 +49,11 @@ func TestGeneratePassphraseLength(t *testing.T) {
 func TestGeneratePassphraseSeparator(t *testing.T) {
 	length := 5
 	sep := "ASDF"
-	num := false
-	sym := false
-	cap := false
+	no_num := true
+	no_sym := true
+	no_cap := true
 
-	passphrase, err := GeneratePassphrase(length, sep, num, sym, cap)
+	passphrase, err := GeneratePassphrase(length, sep, no_num, no_sym, no_cap)
 	if err != nil {
 		t.Errorf("Error: %v", err)
 	}
@@ -73,11 +73,11 @@ func TestGeneratePassphraseSeparator(t *testing.T) {
 func TestGeneratePassphraseNumbers(t *testing.T) {
 	length := 5
 	sep := "-"
-	num := true
-	sym := false
-	cap := false
+	no_num := false
+	no_sym := true
+	no_cap := true
 
-	result, err := GeneratePassphrase(length, sep, num, sym, cap)
+	result, err := GeneratePassphrase(length, sep, no_num, no_sym, no_cap)
 	if err != nil {
 		t.Errorf("Error: %v", err)
 	}
@@ -92,11 +92,11 @@ func TestGeneratePassphraseNumbers(t *testing.T) {
 func TestGeneratePassphraseSymbols(t *testing.T) {
 	length := 5
 	sep := "-"
-	num := false
-	sym := true
-	cap := false
+	no_num := true
+	no_sym := false
+	no_cap := true
 
-	result, err := GeneratePassphrase(length, sep, num, sym, cap)
+	result, err := GeneratePassphrase(length, sep, no_num, no_sym, no_cap)
 	if err != nil {
 		t.Errorf("Error: %v", err)
 	}
@@ -111,11 +111,11 @@ func TestGeneratePassphraseSymbols(t *testing.T) {
 func TestGeneratePassphraseCapitalize(t *testing.T) {
 	length := 5
 	sep := "-"
-	num := false
-	sym := false
-	cap := true
+	no_num := true
+	no_sym := true
+	no_cap := false
 
-	result, err := GeneratePassphrase(length, sep, num, sym, cap)
+	result, err := GeneratePassphrase(length, sep, no_num, no_sym, no_cap)
 	if err != nil {
 		t.Errorf("Error: %v", err)
 	}
@@ -130,11 +130,11 @@ func TestGeneratePassphraseCapitalize(t *testing.T) {
 func TestGeneratePassphraseComplex(t *testing.T) {
 	length := 5
 	sep := "-"
-	num := true
-	sym := true
-	cap := true
+	no_num := false
+	no_sym := false
+	no_cap := false
 
-	result, err := GeneratePassphrase(length, sep, num, sym, cap)
+	result, err := GeneratePassphrase(length, sep, no_num, no_sym, no_cap)
 	if err != nil {
 		t.Errorf("Error: %v", err)
 	}

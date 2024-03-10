@@ -43,23 +43,23 @@ var phraseCmd = &cobra.Command{
 			fmt.Println("Error getting separator: ", err)
 			return
 		}
-		num, err := cmd.Flags().GetBool("number")
+		no_num, err := cmd.Flags().GetBool("no-number")
 		if err != nil {
 			fmt.Println("Error getting number: ", err)
 			return
 		}
-		sym, err := cmd.Flags().GetBool("symbol")
+		no_sym, err := cmd.Flags().GetBool("no-symbol")
 		if err != nil {
 			fmt.Println("Error getting symbol: ", err)
 			return
 		}
-		cap, err := cmd.Flags().GetBool("capitalize")
+		no_cap, err := cmd.Flags().GetBool("no-capitalize")
 		if err != nil {
 			fmt.Println("Error getting capitalize: ", err)
 			return
 		}
 
-		passphrase, err := generator.GeneratePassphrase(len, sep, num, sym, cap)
+		passphrase, err := generator.GeneratePassphrase(len, sep, no_num, no_sym, no_cap)
 		if err != nil {
 			fmt.Println("Error generating passphrase: ", err)
 			return
@@ -73,7 +73,7 @@ func init() {
 
 	phraseCmd.Flags().IntP("length", "l", 6, "Number of words in the passphrase")
 	phraseCmd.Flags().StringP("separator", "s", "-", "Separator character between words")
-	phraseCmd.Flags().BoolP("number", "n", true, "Include a number in the passphrase")
-	phraseCmd.Flags().BoolP("symbol", "y", true, "Include a symbol in the passphrase")
-	phraseCmd.Flags().BoolP("capitalize", "c", true, "Capitalize the words in the passphrase")
+	phraseCmd.Flags().BoolP("no-number", "n", false, "Don't include a number in the passphrase")
+	phraseCmd.Flags().BoolP("no-symbol", "y", false, "Don't include a symbol in the passphrase")
+	phraseCmd.Flags().BoolP("no-capitalize", "c", false, "Don't capitalize a word in the passphrase")
 }
