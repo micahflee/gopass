@@ -38,18 +38,24 @@ var wordCmd = &cobra.Command{
 			fmt.Println("Error getting length: ", err)
 			return
 		}
-		num, err := cmd.Flags().GetBool("numbers")
+		no_num, err := cmd.Flags().GetBool("no-numbers")
 		if err != nil {
 			fmt.Println("Error getting numbers: ", err)
 			return
 		}
-		sym, err := cmd.Flags().GetBool("symbols")
+		no_sym, err := cmd.Flags().GetBool("no-symbols")
 		if err != nil {
 			fmt.Println("Error getting symbols: ", err)
 			return
 		}
 
-		password, err := generator.GeneratePassword(len, num, sym)
+		// Ensure password has a minimum length of 3
+		if len < 3 {
+			fmt.Println("Error: Password length must be at least 3")
+			return
+		}
+
+		password, err := generator.GeneratePassword(len, no_num, no_sym)
 		if err != nil {
 			fmt.Println("Error generating password: ", err)
 			return
@@ -62,7 +68,7 @@ var wordCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(wordCmd)
 
-	wordCmd.Flags().IntP("length", "l", 20, "Number of words in the password")
-	wordCmd.Flags().BoolP("numbers", "n", true, "Include numbers in the password")
-	wordCmd.Flags().BoolP("symbols", "y", true, "Include symbols in the password")
+	wordCmd.Flags().IntP("length", "l", 20, "Number of characters in the password")
+	wordCmd.Flags().BoolP("no-numbers", "n", false, "Don't include numbers in the password")
+	wordCmd.Flags().BoolP("no-symbols", "y", false, "Don't include symbols in the password")
 }

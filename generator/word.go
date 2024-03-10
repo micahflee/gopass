@@ -23,6 +23,7 @@ package generator
 
 import (
 	"crypto/rand"
+	"errors"
 	"math/big"
 )
 
@@ -48,7 +49,11 @@ func containsSymbols(s string) bool {
 // The 'length' parameter specifies the length of the password.
 // The 'num' parameter determines whether the password should include numbers.
 // The 'sym' parameter determines whether the password should include symbols.
-func GeneratePassword(length int, num bool, sym bool) (string, error) {
+func GeneratePassword(length int, no_num bool, no_sym bool) (string, error) {
+	if length < 3 {
+		return "", errors.New("password length must be at least 3")
+	}
+
 	var lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz"
 	var upperCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	var numbers = "0123456789"
@@ -57,10 +62,10 @@ func GeneratePassword(length int, num bool, sym bool) (string, error) {
 	var characters string
 	characters += lowerCaseLetters
 	characters += upperCaseLetters
-	if num {
+	if !no_num {
 		characters += numbers
 	}
-	if sym {
+	if !no_sym {
 		characters += symbols
 	}
 
@@ -75,14 +80,14 @@ func GeneratePassword(length int, num bool, sym bool) (string, error) {
 	}
 
 	// Ensure it meets the requirements
-	if num {
+	if !no_num {
 		if !containsNumbers(password) {
-			return GeneratePassword(length, num, sym)
+			return GeneratePassword(length, no_num, no_sym)
 		}
 	}
-	if sym {
+	if !no_sym {
 		if !containsSymbols(password) {
-			return GeneratePassword(length, num, sym)
+			return GeneratePassword(length, no_num, no_sym)
 		}
 	}
 

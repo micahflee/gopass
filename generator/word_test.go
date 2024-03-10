@@ -28,10 +28,10 @@ import (
 
 // TestGeneratePasswordLength ensures the function returns a string of the correct length
 func TestGeneratePasswordLength(t *testing.T) {
-	num := false
-	sym := false
+	no_num := false
+	no_sym := false
 
-	password20, err := GeneratePassword(20, num, sym)
+	password20, err := GeneratePassword(20, no_num, no_sym)
 	if err != nil {
 		t.Errorf("Error: %v", err)
 	}
@@ -39,7 +39,7 @@ func TestGeneratePasswordLength(t *testing.T) {
 		t.Errorf("Expected 20 characters, got %v", len(password20))
 	}
 
-	password50, err := GeneratePassword(50, num, sym)
+	password50, err := GeneratePassword(50, no_num, no_sym)
 	if err != nil {
 		t.Errorf("Error: %v", err)
 	}
@@ -48,13 +48,25 @@ func TestGeneratePasswordLength(t *testing.T) {
 	}
 }
 
+// TestGeneratePasswordTooShort ensures the function returns an error if the length is less than 3
+func TestGeneratePasswordTooShort(t *testing.T) {
+	length := 2
+	no_num := false
+	no_sym := false
+
+	_, err := GeneratePassword(length, no_num, no_sym)
+	if err == nil {
+		t.Errorf("Expected error, got nil")
+	}
+}
+
 // TestGeneratePasswordNumbers ensures the function returns a string with numbers in it
 func TestGeneratePasswordNumbers(t *testing.T) {
 	length := 20
-	num := true
-	sym := false
+	no_num := false
+	no_sym := true
 
-	password, err := GeneratePassword(length, num, sym)
+	password, err := GeneratePassword(length, no_num, no_sym)
 	if err != nil {
 		t.Errorf("Error: %v", err)
 	}
@@ -67,10 +79,10 @@ func TestGeneratePasswordNumbers(t *testing.T) {
 // TestGeneratePasswordSymbols ensures the function returns a string with symbols in it
 func TestGeneratePasswordSymbols(t *testing.T) {
 	length := 20
-	num := false
-	sym := true
+	no_num := true
+	no_sym := false
 
-	password, err := GeneratePassword(length, num, sym)
+	password, err := GeneratePassword(length, no_num, no_sym)
 	if err != nil {
 		t.Errorf("Error: %v", err)
 	}
@@ -83,10 +95,10 @@ func TestGeneratePasswordSymbols(t *testing.T) {
 // TestGeneratePasswordComplex ensures the function returns a string with numbers and symbols in it
 func TestGeneratePasswordComplex(t *testing.T) {
 	length := 20
-	num := true
-	sym := true
+	no_num := false
+	no_sym := false
 
-	password, err := GeneratePassword(length, num, sym)
+	password, err := GeneratePassword(length, no_num, no_sym)
 	if err != nil {
 		t.Errorf("Error: %v", err)
 	}
