@@ -31,8 +31,7 @@ import (
 var wordCmd = &cobra.Command{
 	Use:   "word",
 	Short: "Generate a password",
-	Long: `This generates a secure passphrase of a given length. You can choose the 
-length of the password, and whether or not to include numbers and/or symbols.`,
+	Long:  `This generates a secure passphrase of a given length. You can choose the length of the password, and whether or not to include numbers and/or symbols.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		len, err := cmd.Flags().GetInt("length")
 		if err != nil {
