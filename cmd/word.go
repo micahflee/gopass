@@ -24,6 +24,7 @@ package cmd
 import (
 	"fmt"
 
+	"github.com/micahflee/gopass/generator"
 	"github.com/spf13/cobra"
 )
 
@@ -34,7 +35,29 @@ var wordCmd = &cobra.Command{
 	Long: `This generates a secure passphrase of a given length. You can choose the 
 length of the password, and whether or not to include numbers and/or symbols.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("word called")
+		len, err := cmd.Flags().GetInt("length")
+		if err != nil {
+			fmt.Println("Error getting length: ", err)
+			return
+		}
+		num, err := cmd.Flags().GetBool("numbers")
+		if err != nil {
+			fmt.Println("Error getting numbers: ", err)
+			return
+		}
+		sym, err := cmd.Flags().GetBool("symbols")
+		if err != nil {
+			fmt.Println("Error getting symbols: ", err)
+			return
+		}
+
+		password, err := generator.GeneratePassword(len, num, sym)
+		if err != nil {
+			fmt.Println("Error generating password: ", err)
+			return
+		}
+		fmt.Println(password)
+
 	},
 }
 
@@ -42,6 +65,6 @@ func init() {
 	rootCmd.AddCommand(wordCmd)
 
 	wordCmd.Flags().IntP("length", "l", 20, "Number of words in the password")
-	wordCmd.Flags().BoolP("numbers", "y", true, "Include numbers in the password")
+	wordCmd.Flags().BoolP("numbers", "n", true, "Include numbers in the password")
 	wordCmd.Flags().BoolP("symbols", "y", true, "Include symbols in the password")
 }

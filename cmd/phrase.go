@@ -62,12 +62,12 @@ and whether or not to include a numbers and/or a symbols.`,
 			return
 		}
 
-		phrase, err := generator.GeneratePassphrase(len, sep, num, sym, cap)
+		passphrase, err := generator.GeneratePassphrase(len, sep, num, sym, cap)
 		if err != nil {
 			fmt.Println("Error generating passphrase: ", err)
 			return
 		}
-		fmt.Println(phrase)
+		fmt.Println(passphrase)
 	},
 }
 

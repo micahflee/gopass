@@ -79,3 +79,23 @@ func TestGeneratePasswordSymbols(t *testing.T) {
 		t.Errorf("No symbols in password")
 	}
 }
+
+// TestGeneratePasswordComplex ensures the function returns a string with numbers and symbols in it
+func TestGeneratePasswordComplex(t *testing.T) {
+	length := 20
+	num := true
+	sym := true
+
+	password, err := GeneratePassword(length, num, sym)
+	if err != nil {
+		t.Errorf("Error: %v", err)
+	}
+
+	if matched, _ := regexp.MatchString("[0-9]", password); !matched {
+		t.Errorf("No numbers in password")
+	}
+
+	if matched, _ := regexp.MatchString("[!@#$%^&*()_+]", password); !matched {
+		t.Errorf("No symbols in password")
+	}
+}
