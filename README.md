@@ -23,6 +23,18 @@ $ gopass code
 060781
 ```
 
+# Getting Started
+
+I haven't put much effort into packaging. To install, you'll need to [install Go](https://go.dev/dl/) and then run:
+
+```
+go install github.com/micahflee/gopass@latest
+```
+
+Gopass will get installed in `$GOPATH/bin/gopass`.
+
+# Usage
+
 ## Generating Passphrases
 
 By default, passphrases contain 5 words, are separated by `-` characters, include a capitalized word, and include one number and one symbol. This is configurable using the following flags:
