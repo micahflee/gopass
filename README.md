@@ -36,9 +36,9 @@ gopass phrase --length 7 --separator . --no-number --no-symbol --no-capitalize
 
 This will generate a passphrase like `lived.movie.swore.spree.sage.floss.spent`.
 
-## Generator Passwords
+## Generating Passwords
 
-By default, passwords contain 20 characters, uppercase and lowercase letters, numbers, and symbols. This is configurable using the following flags:
+By default, passwords contain 20 characters, letters, numbers, and symbols. This is configurable using the following flags:
 
 - `-l`, `--length int`: Number of characters in the password (default 20)
 - `-n`, `--no-numbers`: Don't include numbers in the password
