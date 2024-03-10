@@ -57,7 +57,7 @@ gopass word --length 16 --no-symbols
 
 This will generate a password like `QKiyeYcyd4B6ndq5`.
 
-## Generator Passcodes
+## Generating Passcodes
 
 By default, passcodes are 6 digits long. This is configurable:
 
