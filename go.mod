@@ -1,6 +1,6 @@
 module github.com/micahflee/gopass
 
-go 1.22.1
+go 1.22
 
 require (
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
