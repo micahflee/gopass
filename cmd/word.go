@@ -41,13 +41,7 @@ length of the password, and whether or not to include numbers and/or symbols.`,
 func init() {
 	rootCmd.AddCommand(wordCmd)
 
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// wordCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// wordCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	wordCmd.Flags().IntP("length", "l", 20, "Number of words in the password")
+	wordCmd.Flags().BoolP("numbers", "y", true, "Include numbers in the password")
+	wordCmd.Flags().BoolP("symbols", "y", true, "Include symbols in the password")
 }
