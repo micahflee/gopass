@@ -1,6 +1,6 @@
 # Gopass
 
-Gopass is a secure password, passphrase, and passcode generator that uses a [cryptographically secure random number generator]((https://pkg.go.dev/crypto/rand)). It uses the Diceware method to generate secure and memorable passphrases.
+Gopass is a password, passphrase, and passcode generator that uses a [cryptographically secure random number generator]((https://pkg.go.dev/crypto/rand)). It uses the Diceware method to generate secure and memorable passphrases.
 
 For example, if you need a passphrase, run `gopass phrase`:
 
